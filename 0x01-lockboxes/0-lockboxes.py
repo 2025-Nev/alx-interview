@@ -1,37 +1,27 @@
-from collections import deque
+#!/usr/bin/python3
+"""
+You have n number of locked boxes in front of you.
+Each box is numbered sequentially
+from 0 to n - 1 and each box may
+contain keys to the other boxes.
+"""
+
 
 def canUnlockAll(boxes):
     """
-    Determines if all boxes can be opened.
+     a method that determines if all the boxes can be opened.
 
-    Args:
-    boxes (list of lists): A list of boxes where each box is a list of keys.
-
-    Returns:
-    bool: True if all boxes can be opened, False otherwise.
+    :param boxes:
+    :return: True or False
     """
-    # Initialize a set to keep track of opened boxes
-    opened = set()
-    
-    # Initialize a queue with the first box
-    queue = deque([0])
-    
-    # Mark the first box as opened
-    opened.add(0)
-    
-    # While there are still boxes to open
-    while queue:
-        # Get the next box
-        box = queue.popleft()
-        
-        # For each key in the box
-        for key in boxes[box]:
-            # If the key is valid and the box is not already opened
-            if key < len(boxes) and key not in opened:
-                # Mark the box as opened
-                opened.add(key)
-                # Add the box to the queue
-                queue.append(key)
-    
-    # Return True if all boxes are opened, False otherwise
-    return len(opened) == len(boxes)
+    if not boxes or type(boxes) is not list:
+        return False
+
+    unlocked = [0]
+    for n in unlocked:
+        for key in boxes[n]:
+            if key not in unlocked and key < len(boxes):
+                unlocked.append(key)
+    if len(unlocked) == len(boxes):
+        return True
+    return False
